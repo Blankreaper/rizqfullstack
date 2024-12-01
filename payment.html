@@ -1,0 +1,267 @@
+<?php
+session_start();
+if (!isset($_SESSION['id'])) {
+    // Redirect to login if the session is not set
+    header("Location: logreg.php");
+    exit();
+}
+// Access the session variables
+$id = $_SESSION['id'];
+$name = $_SESSION['name'];
+$email = $_SESSION['email'];
+?>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rizq © Blankreaper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(109.6deg, rgb(255, 219, 47) 11.2%, rgb(244, 253, 0) 100.2%);
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 1200px;
+        }
+        .payment-options, .order-summary {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .payment-options {
+            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .payment-options h2 {
+            margin-top: 20px;
+        }
+        .payment-box {
+            padding: 20px;
+            background-color: #fafafa;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .payment-box h3 {
+            margin-top: 0;
+        }
+        .payment-box .grid {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .payment-box .grid button {
+            flex: 1;
+            padding: 20px;
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        .payment-box .grid button.selected {
+            border-color: #f0c040;
+            background-color: #e7f0ff;
+        }
+        .payment-box .grid button:hover {
+            border-color: #f0c040;
+        }
+        .payment-box .grid button img {
+            width: 50px;
+            height: auto;
+        }
+        .payment-box .grid button.cash {
+            background-color: #fafafa;
+            border-color: #ddd;
+        }
+        .payment-box .grid button.cash.selected {
+            border-color: #f0c040;
+            background-color: #e7f0ff;
+        }
+        .payment-box .grid button.cash:hover {
+            border-color: #f0c040;
+        }
+        .payment-box .grid button.cash .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+        }
+        .order-summary {
+            background-color: #fafafa;
+        }
+        .order-summary p {
+            font-size: 1.2em;
+            margin-top: 0;
+        }
+        .order-summary .total {
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        .order-summary .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: black;
+    color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .order-summary .button:hover {
+            background-color: #f0c040;
+    color: black;
+    transition: 0.3s ease-in-out;
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+    
+
+    <div class="container">
+        <div class="payment-options">
+            <h2>Select Payment Method</h2>
+            <div class="payment-box">
+                <h3>Credit/Debit Card</h3>
+                <div class="grid">
+                    <button class="payment-method" id="paymenttype" data-method="visa">
+                        <img src="visa.png" alt="Visa">
+                    </button>
+                    <button class="payment-method" id="paymenttype" data-method="mastercard">
+                        <img src="mastercard.png" alt="MasterCard">
+                    </button>
+                </div>
+            </div>
+            <div class="payment-box">
+                <h3>Mobile Banking</h3>
+                <div class="grid">
+                    <button class="payment-method" id="paymenttype" data-method="rocket">
+                        <img src="Rocket_Logo.png" alt="Rocket">
+                    </button>
+                    <button class="payment-method" id="paymenttype" data-method="bkash">
+                        <img src="bKash_logo.png" alt="Bkash">
+                    </button>
+                </div>
+            </div>
+            <div class="payment-box">
+                <div class="grid">
+                    <button class="payment-method cash" id="paymenttype" data-method="cash">
+
+                        <span>Cash on Delivery</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <p id="item-name"></p>
+            <p id="size-container" style="display: none;">Size: <span id="size"></span></p>
+            <p>Add-Ons: <span id="addons"></span></p>
+            <p class="total">Total Price: <span id="total-price"></span></p>
+            <a href="javascript:void(0)" onclick="proceedToCompleteOrder()" class="button">Proceed to Complete Order</a>
+
+
+        </div>
+    </div>
+
+    
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+    
+        function selectPaymentMethod(event) {
+            document.querySelectorAll('.payment-method').forEach(button => {
+                button.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+        }
+    
+        window.onload = function() {
+            // Get URL parameters and update page elements
+            const itemName = getQueryParam('item');
+            const size = getQueryParam('size') || 'None';
+            const addons = getQueryParam('sauces') || 'None';
+            const totalPrice = parseFloat(getQueryParam('totalPrice')).toFixed(2);
+    
+            document.getElementById('item-name').innerText = `Item: ${itemName}`;
+            document.getElementById('size').innerText = size;
+            document.getElementById('addons').innerText = addons;
+            document.getElementById('total-price').innerText = `$${totalPrice}`;
+    
+            if (size === 'None') {
+                document.getElementById('size-container').style.display = 'none';
+            } else {
+                document.getElementById('size-container').style.display = 'block';
+            }
+    
+            // Set up event listeners for payment method selection
+            document.querySelectorAll('.payment-method').forEach(button => {
+                button.addEventListener('click', selectPaymentMethod);
+            });
+        };
+    
+        function proceedToCompleteOrder() {
+            // Gather details from page elements for submission
+            const itemName = document.getElementById('item-name').innerText.replace("Item: ", "");
+            const size = document.getElementById('size').innerText;
+            const addons = document.getElementById('addons').innerText;
+            const totalPrice = document.getElementById('total-price').innerText.replace('$', '');
+    
+            const name = 'User Name'; // Replace with actual user data if available
+            const email = 'user@example.com'; // Replace with actual user data if available
+            const paymentType = document.querySelector('.payment-method.selected') 
+                ? document.querySelector('.payment-method.selected').dataset.method 
+                : 'None';
+    
+            const queryString = new URLSearchParams({
+                name: name,
+                email: email,
+                "item-name": itemName,
+                size: size,
+                addons: addons,
+                "total-price": totalPrice,
+                paymenttype: paymentType
+            }).toString();
+    
+            // Redirect to config.php with query parameters
+            window.location.href = `config.php?${queryString}`;
+        }
+    </script>
+    
+    
+    
+</body>
+ 
+</html>

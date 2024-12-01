@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rizq © Blankreaper</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(109.6deg, rgb(255, 219, 47) 11.2%, rgb(244, 253, 0) 100.2%);
+        }
+
+        .order-completed-container {
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #f0c040;;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: inline-block;
+            border: 6px solid #f0c040;;
+            position: relative;
+            animation: scaleIn 0.5s ease-in-out forwards;
+            margin-bottom: 20px;
+        }
+
+        .checkmark::before,
+        .checkmark::after {
+            content: '';
+            position: absolute;
+            background-color: #f0c040;;
+            border-radius: 2px;
+            transform-origin: bottom left;
+        }
+
+        /* The short part of the checkmark */
+        .checkmark::before {
+            width: 10px;
+            height: 20px;
+            top: 38px;
+    left: 25px;
+            transform: rotate(-45deg);
+            opacity: 0;
+            animation: drawCheckBefore 0.5s 0.5s ease-in-out forwards;
+        }
+
+        /* The long part of the checkmark */
+        .checkmark::after {
+            width: 10px;
+    height: 50px;
+    top: 10px;
+    left: 27px;
+            transform: rotate(45deg);
+            opacity: 0;
+            animation: drawCheckAfter 0.5s 1s ease-in-out forwards;
+        }
+
+        h1 {
+            color: #f0c040;;
+            margin: 0;
+            padding-bottom: 10px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-weight: lighter;
+        }
+
+        p {
+            color: #333;
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes drawCheckBefore {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes drawCheckAfter {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+    <script>
+        // Redirect to the home page after 5 seconds
+        setTimeout(function(){
+            window.location.href = 'home.html';
+        }, 5000);
+    </script>
+</head>
+<body>
+    <div class="order-completed-container">
+        <div class="checkmark"></div>
+        <h1>Thank You!</h1>
+        <p>Your order has been completed successfully.</p>
+        <p>You will be redirected to the home page shortly.</p>
+    </div>
+
+
+    
+</body>
+</html>

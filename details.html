@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rizq © Blankreaper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(109.6deg, rgb(255, 219, 47) 11.2%, rgb(244, 253, 0) 100.2%);
+    filter: blur(10%);
+    margin: 0;
+    padding: 0;
+        }
+        .details {
+            margin: 103px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 1rem;
+        }
+        .details h2 {
+            margin-bottom: 20px;
+    position: relative;
+    margin-inline: auto;
+    text-align: center;
+    top: 2rem;
+        }
+
+
+        div#size-container {
+    margin-inline: auto;
+    justify-content: center;
+    position: relative;
+    /* display: flex; */
+    top: 1rem;
+}
+
+        .details .sizes-grid,
+        .details .sauces-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 70px;
+        }
+        .details .size-item,
+        .details .sauce-item {
+            padding: 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 0.5rem;
+        }
+        .details .size-item.selected,
+        .details .sauce-item.selected {
+            background-color: #f0c040;
+            border-color: #f0c040;
+        }
+        .details button {
+            margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 0.5rem;
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+.details button:hover{
+    background-color: #f0c040;
+    color: black;
+    transition: 0.3s ease-in-out;
+    
+}
+        label{
+            position: relative;
+    margin-inline: auto;
+    top: -1rem;
+    text-align: center;
+  margin-inline: auto;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+label::before,
+label::after {
+  content: "";
+    width: 38px;
+    height: 1px;
+    background-color: gray;
+    margin: 0 10px;
+
+}
+
+
+p {
+    top: 3rem;
+    position: relative;
+    padding-bottom: 7rem;
+}
+
+#totalprice{
+    font-weight: bolder;
+}
+
+
+.button-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-inline: auto;
+    top: 4rem;
+}
+
+.button {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+}
+
+/* Create the initial left arrow */
+.button::before,
+.button::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 4px;
+    background-color: black;
+    transition: all 0.5s ease;
+}
+
+.button::before {
+    transform: rotate(-45deg) translate(1px, -18px);
+    border-radius: 1rem;
+}
+
+.button::after {
+    transform: rotate(45deg) translate(1px, 17px);
+    border-radius: 1rem;
+}
+
+.button .third-line {
+    position: absolute;
+    width: 88px;
+    height: 4px;
+    background-color: black;
+    transition: all 0.5s ease;
+    left: 15px;
+    border-radius: 1rem;
+}
+
+/* Hover effect to transform the left arrow into a cross */
+.button:hover::before {
+    transform: rotate(45deg) translate(0, 0);
+    width: 60px;
+}
+
+.button:hover::after {
+    transform: rotate(-45deg) translate(0, 0);
+    width: 60px;
+}
+
+.button:hover .third-line {
+    opacity: 0;
+}
+
+
+
+.footer{
+    opacity: 0.9;
+    position: relative;
+    z-index: var(--z-fixed);
+    bottom: 2rem;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+        
+    </style>
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function updateTotalPrice() {
+            const basePrice = parseFloat(getQueryParam('price'));
+            let sizePrice = 0;
+            let saucePrice = 0;
+
+            const selectedSize = document.querySelector('.size-item.selected');
+            if (selectedSize) {
+                sizePrice = parseFloat(selectedSize.dataset.price);
+            }
+
+            document.querySelectorAll('.sauce-item.selected').forEach((item) => {
+                const price = parseFloat(item.dataset.price);
+                saucePrice += price;
+            });
+
+            const totalPrice = basePrice + sizePrice + saucePrice;
+            document.getElementById('total-price').innerText = `$${totalPrice.toFixed(2)}`;
+        }
+
+        function toggleSelection(event, groupSelector) {
+            document.querySelectorAll(groupSelector).forEach((item) => {
+                item.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+            updateTotalPrice();
+        }
+
+        function toggleSauceSelection(event) {
+            event.target.classList.toggle('selected');
+            updateTotalPrice();
+        }
+
+        function proceedToPayment() {
+            const itemName = document.getElementById('item-name').innerText;
+            const basePrice = parseFloat(document.getElementById('item-price').innerText.replace('$', ''));
+            const sizePrice = document.querySelector('.size-item.selected') ? parseFloat(document.querySelector('.size-item.selected').dataset.price) : 0;
+            const saucePrices = Array.from(document.querySelectorAll('.sauce-item.selected')).map(item => item.dataset.price).reduce((acc, price) => acc + parseFloat(price), 0);
+            const totalPrice = basePrice + sizePrice + saucePrices;
+
+            const selectedSize = document.querySelector('.size-item.selected') ? document.querySelector('.size-item.selected').innerText : 'None';
+            const selectedSauces = Array.from(document.querySelectorAll('.sauce-item.selected')).map(item => item.innerText).join(', ');
+
+            const queryString = new URLSearchParams({
+                item: itemName,
+                size: selectedSize,
+                sizePrice: sizePrice,
+                sauces: selectedSauces,
+                saucePrice: saucePrices,
+                totalPrice: totalPrice
+            }).toString();
+
+            window.location.href = `payment.html?${queryString}`;
+        }
+
+        window.onload = function() {
+            const itemId = getQueryParam('id');
+            const itemName = getQueryParam('item');
+            const itemPrice = getQueryParam('price');
+
+            document.getElementById('item-name').innerText = itemName.charAt(0).toUpperCase() + itemName.slice(1);
+            document.getElementById('item-price').innerText = `$${itemPrice}`;
+            document.getElementById('total-price').innerText = `$${itemPrice}`;
+
+            if (itemId === 'pizza') {
+                document.getElementById('size-container').style.display = 'block';
+            } else {
+                document.getElementById('size-container').style.display = 'none';
+            }
+
+            document.querySelectorAll('.size-item').forEach((item) => {
+                item.addEventListener('click', (event) => toggleSelection(event, '.size-item'));
+            });
+
+            document.querySelectorAll('.sauce-item').forEach((item) => {
+                item.addEventListener('click', toggleSauceSelection);
+            });
+        }
+
+
+        function navigateToPage() {
+            window.location.href = 'home.html'; // Replace with your target page
+        }
+    </script>
+</head>
+<body>
+    <div class="button-container">
+        <button class="button" onclick="navigateToPage()">
+            <div class="third-line"></div>
+        </button>
+    </div>
+
+    <div class="details">
+        <h2 id="item-name"></h2>
+        <p>Price: <span id="item-price"></span></p>
+
+        <div id="size-container" style="display: none;">
+            <label>Sizes</label>
+            <div class="sizes-grid">
+                <div class="size-item" data-price="0">Small</div>
+                <div class="size-item" data-price="2">Medium (+$2.00)</div>
+                <div class="size-item" data-price="4">Large (+$4.00)</div>
+            </div>
+        </div>
+
+        <label>Add-Ons</label>
+        <div class="sauces-grid">
+            <div class="sauce-item" data-price="0">Tomato Sauce</div>
+            <div class="sauce-item" data-price="1">Barbecue Sauce (+$1.00)</div>
+            <div class="sauce-item" data-price="1.5">Garlic Sauce (+$1.50)</div>
+            <div class="sauce-item" data-price="1">Cheese Slice (+$1.00)</div>
+        </div>
+
+        <p id="totalprice">Total Price: <span id="total-price"></span></p>
+
+        <button onclick="proceedToPayment()">Order Now</button>
+    </div>
+
+    <footer class="footer">
+
+        Copyright © Blankreaper
+      </footer>
+</body>
+</html>

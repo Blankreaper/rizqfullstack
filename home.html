@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--=============== FAVICON ===============
+    
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">-->
+    
+
+    <!--=============== REMIXICONS ===============-->
+    <link
+  href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+  rel="stylesheet"/>
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="home.css">
+
+
+    <title>Rizq © Blankreaper</title>
+
+</head>
+
+<!--==================== HEADER ====================-->
+<body>
+<header class="header" id="header">
+    <nav class="nav__container">
+
+       <a href="#" class="nav__logo">
+       Rizq
+    </a>
+
+    <div class="nav__menu" id="nav-menu">
+       <ul class="nav__list">
+
+
+
+         <li class="nav__item">
+            <a href="javascript:void(0);" class="nav__link dropdown-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                    <path d="M20 22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13Z"></path>
+                </svg>
+            </a>
+            <div class="dropdown-menu">
+                <a href="orders.php" class="dropdown-item">Orders</a>
+                <a href="logout.php" class="dropdown-item">Logout</a>
+            </div>
+        </li>
+        
+
+          
+       </ul>
+      </div>
+
+      
+    
+    
+    </nav>
+    
+ </header>
+
+
+ <section class="section">
+   <div class="content">
+      <div class="images">
+         <img src="ad1.png">
+         <img src="ad2.png">
+         <img src="ad3.png">
+      </div>
+      <div class="btm-slides">
+         <span onclick="btm_slide(1)"></span>
+         <span onclick="btm_slide(2)"></span>
+         <span onclick="btm_slide(3)"></span>
+      </div>
+
+      <div class="sliders left" id="leftside" onclick="side_slide(-1)">
+         <span class="fas fa-angle-left"></span>
+      </div>
+      <div class="sliders right" onclick="side_slide(1)">
+         <span class="fas fa-angle-right"></span>
+      </div>
+   </div>
+ </section>
+
+ <br>
+<h1 class="sectitle">MENU</h1>
+<br>
+
+<section class="items">
+   <div class="food" onclick="window.location.href='details.html?item=Tripple Decker&price=7.00'">
+      <div class="pic">
+         <img src="tripple.png" alt="">
+      </div>
+
+      <div class="details">
+         <div class="info">
+            <h3>Tripple Decker</h3>
+            <h6>3 Beef Pattys, Lettuce, Tomato Slice, Sauce, 4 Cheese Slice</h6>
+         </div>
+
+         <div class="price">
+            <h3 class="money">$7.00</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11ZM12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z"></path></svg>
+            
+         </div>
+         
+
+
+
+      </div>
+   </div>
+
+
+   <div class="food" onclick="window.location.href='details.html?item=Signature Classic&price=10.00'">
+      <div class="pic">
+         <img src="single.png" alt="">
+      </div>
+
+      <div class="details">
+         <div class="info">
+            <h3>Signature Classic</h3>
+            <h6>1 Chicken Patty, 1 Egg, 2 Bacons, Lettuce, 1 Cheese Slice</h6>
+         </div>
+
+         <div class="price">
+            <h3 class="money">$10.00</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11ZM12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z"></path></svg>
+         </div>
+         
+
+
+
+      </div>
+   </div>
+
+   <div class="food" onclick="window.location.href='details.html?item=Everyday Bacon&price=5.00'">
+      <div class="pic">
+         <img src="bacon.png" alt="">
+      </div>
+
+      <div class="details">
+         <div class="info">
+            <h3>Everyday Bacon</h3>
+            <h6>4 Bacons, Lettuce, Tomato Slice, 2 Cheese Slice</h6>
+         </div>
+
+         <div class="price">
+            <h3 class="money">$5.00</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11ZM12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z"></path></svg>
+         </div>
+         
+
+
+
+      </div>
+   </div>
+
+
+
+   <div class="food" onclick="window.location.href='details.html?id=pizza&item=Classic Pepperoni&price=10.99'">
+      <div class="pic">
+         <img src="pizza 1.png" alt="">
+      </div>
+
+      <div class="details">
+         <div class="info">
+            <h3>Classic Pepperoni </h3>
+            <h6>Pepperoni, Mozarella Cheese</h6>
+         </div>
+
+         <div class="price">
+            <h3 class="money">$10.99</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11ZM12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z"></path></svg>
+         </div>
+         
+
+
+
+      </div>
+   </div>
+
+
+
+   <div class="food" onclick="window.location.href='details.html?id=pizza&item=Margherita&price=12.00'">
+      <div class="pic">
+         <img src="pizza 2.png" alt="">
+      </div>
+
+      <div class="details">
+         <div class="info">
+            <h3>Margherita</h3>
+            <h6>Margherita Cheese, Basil leaves, Pizza Sauce</h6>
+         </div>
+
+         <div class="price">
+            <h3 class="money">$12.00</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11ZM12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z"></path></svg>
+         </div>
+         
+
+
+
+      </div>
+   </div>
+
+
+
+   <div class="food" onclick="window.location.href='details.html?id=pizza&item=Sauceroni&price=15.00'">
+      <div class="pic">
+         <img src="pizza 3.png" alt="">
+      </div>
+
+      <div class="details">
+         <div class="info">
+            <h3>Sauceroni</h3>
+            <h6>Chicken Sausages, Pepperoni, Mozarella Cheese</h6>
+         </div>
+
+         <div class="price">
+            <h3 class="money">$15.00</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11ZM12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z"></path></svg>
+         </div>
+         
+
+
+
+      </div>
+   </div>
+
+</section>
+
+
+
+
+<script src="home.js"></script>
+
+
+ <footer class="footer">
+
+   Copyright © Blankreaper
+ </footer>
+
+</body>
+</html>

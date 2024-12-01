@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--=============== FAVICON ===============
+    
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">-->
+    
+
+    <!--=============== REMIXICONS ===============-->
+    <link
+  href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+  rel="stylesheet"/>
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="style.css">
+
+
+    <title>Rizq © Blankreaper</title>
+
+</head>
+
+<!--==================== HEADER ====================-->
+<body>
+<header class="header" id="header">
+    <nav class="nav__container">
+
+       <a href="index.html" class="nav__logo">
+       Rizq
+    </a>
+
+    <div class="nav__menu" id="nav-menu">
+       <ul class="nav__list">
+
+          <li class="nav__item">
+             <a href="logreg.php" class="nav__link">SIGN UP</a>
+          </li>
+
+
+
+          <li class="nav__item">
+             <a href="logreg.php" class="nav__link">LOGIN</a>
+          </li>
+
+          
+       </ul>
+      </div>
+
+      
+    
+    
+    </nav>
+    
+ </header>
+
+
+ <main class="main">
+   <div class="leftside">
+      <div class="punch">
+         <h1 class="punchline">SAVOR THE</h1>
+      <h1 class="punchline2">HEAVENLY</h1>
+      <h1 class="punchline3">RIZQ!</h1>
+      </div>
+      
+
+   <div class="location-container">
+      <input type="text" id="location" name="location" placeholder="Type your location here...">
+      <button class="icon-button" id="redirectButton">
+         <i class="ri-arrow-right-s-line"><a href="logreg.php"></a></i>
+     </button>
+      
+  </div>
+   </div>
+
+   
+
+   <img class="img" src="burger.png" alt="">
+   
+ </main>
+
+
+
+ <footer class="footer">
+
+   Copyright © Blankreaper
+ </footer>
+
+ <script>
+   document.getElementById("redirectButton").addEventListener("click", redirect);
+   function redirect(){ window.location = "logreg.php";}
+ </script>
+
+</body>
+</html>
